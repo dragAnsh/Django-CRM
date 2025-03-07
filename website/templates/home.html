@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<!-- let's add the form to our home.html page -->
+<!-- center the form in the middle of screen -->
+    <div class="col-md-6 offset-md-3">
+
+    {% if user.is_authenticated %}
+
+        <h1> HomePage! </h1>
+
+    {% else %}
+
+        <h1>Login</h1>
+        <br>
+
+        <form action="{% url 'home' %}" method="post">
+
+            <!-- any time you create a form in Django you have to give a csrf token to secure it from attacks by hackers -->
+            {% csrf_token %}
+
+            <div class="mb-3">
+                <input type="text" class="form-control" name="username" placeholder="Username" required>
+            </div>
+            <br>
+            <div class="mb-3">
+                <input type="password" class="form-control" name="password" placeholder="Password" required>
+            </div>
+            <br>
+            <button type="submit" class="btn btn-secondary">Login</button>
+
+        </form>
+
+    {% endif %}
+    </div>
+
+
+{% endblock content %}
